@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: INFO
+    web: INFO
+server:
+  connection-timeout: 3600s
+  port: 7777
+  tomcat:
+    accept-count: 100
+    max-connections: 8192
+    threads:
+      min-spare: 1
+      max: 200
