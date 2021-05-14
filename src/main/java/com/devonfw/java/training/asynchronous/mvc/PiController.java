@@ -1,6 +1,7 @@
 package com.devonfw.java.training.asynchronous.mvc;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import com.devonfw.java.training.asynchronous.entity.Pi;
 import com.devonfw.java.training.asynchronous.service.PiMultiService;
@@ -29,5 +30,15 @@ public class PiController {
         model.addAttribute("timeToComputeInSeconds", timeToComputeInSeconds);
         model.addAttribute("numberOfProbes", numberOfProbes);
         return "pi";
+    }
+
+    @GetMapping("pi-async")
+    public Callable<String> piAsync(
+            @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
+            @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes,
+            Model model) {
+        return () -> {
+            return pi(timeToComputeInSeconds, numberOfProbes, model);
+        };
     }
 }

@@ -11,3 +11,7 @@ server:
     threads:
       min-spare: 1
       max: 200
+spring:
+  mvc:
+    async:
+      request-timeout: 3600000
