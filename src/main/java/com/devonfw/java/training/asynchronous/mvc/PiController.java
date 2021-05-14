@@ -25,7 +25,7 @@ public class PiController {
             @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
             @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes,
             Model model) {
-        List<Pi> pis = piService.computeMultiPis(timeToComputeInSeconds, numberOfProbes);
+        List<Pi> pis = piService.computeMultiPisAsync(timeToComputeInSeconds, numberOfProbes);
         model.addAttribute("pis", pis);
         model.addAttribute("timeToComputeInSeconds", timeToComputeInSeconds);
         model.addAttribute("numberOfProbes", numberOfProbes);
