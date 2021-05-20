@@ -5,27 +5,19 @@ import java.util.concurrent.CompletableFuture;
 
 import com.devonfw.java.training.asynchronous.entity.Pi;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PiSingleService {
 
-    Logger logger = LoggerFactory.getLogger(PiSingleService.class);
-
     @Async
     public CompletableFuture<Pi> computeSinglePiAsync(int timeToComputeInSeconds) {
-        logger.info("Start computeSinglePiAsync");
         Pi pi = computeSinglePi(timeToComputeInSeconds);
-        logger.info("End computeSinglePiAsync");
         return CompletableFuture.completedFuture(pi);
     }
 
     public Pi computeSinglePi(int timeToComputeInSeconds) {
-        logger.info("Start computeSinglePi");
-
         long nThrows = 0;
         long nHits = 0;
 
@@ -43,7 +35,6 @@ public class PiSingleService {
 
         Pi pi = computePiUsingThrowsAndHits(nThrows, nHits);
 
-        logger.info("End computeSinglePi");
         return pi;
     }
 
