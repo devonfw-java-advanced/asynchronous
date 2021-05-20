@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PiSingleService {
 
-    Logger logger = LoggerFactory.getLogger(PiSingleService.class);
-
     @Async
     public CompletableFuture<Pi> computeSinglePiAsync(int timeToComputeInSeconds) {
         Pi pi = computeSinglePi(timeToComputeInSeconds);
