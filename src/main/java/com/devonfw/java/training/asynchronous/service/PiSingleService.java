@@ -1,13 +1,23 @@
 package com.devonfw.java.training.asynchronous.service;
 
 import java.time.Instant;
+import java.util.concurrent.CompletableFuture;
 
 import com.devonfw.java.training.asynchronous.entity.Pi;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PiSingleService {
+
+    Logger logger = LoggerFactory.getLogger(PiSingleService.class);
+
+    @Async
+    public CompletableFuture<Pi> computeSinglePiAsync(int timeToComputeInSeconds) {
+        Pi pi = computeSinglePi(timeToComputeInSeconds);
+        return CompletableFuture.completedFuture(pi);
+    }
 
     public Pi computeSinglePi(int timeToComputeInSeconds) {
         long nThrows = 0;

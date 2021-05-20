@@ -23,7 +23,7 @@ public class PiRest {
     public List<Pi> pi(
             @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
             @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes) {
-        return piService.computeMultiPis(timeToComputeInSeconds, numberOfProbes);
+        return piService.computeMultiPisAsync(timeToComputeInSeconds, numberOfProbes);
     }
 
     @GetMapping("pi-async")
@@ -31,7 +31,7 @@ public class PiRest {
             @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
             @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes) {
         return () -> {
-            return piService.computeMultiPis(timeToComputeInSeconds, numberOfProbes);
+            return piService.computeMultiPisAsync(timeToComputeInSeconds, numberOfProbes);
         };
     }
 
