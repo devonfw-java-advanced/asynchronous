@@ -20,8 +20,6 @@ public class PiMultiService {
     private PiSingleService piSingleService;
 
     public List<Pi> computeMultiPisAsync(int timeToComputeInSeconds, int numberOfProbes) {
-        logger.info("Start computeMultiPisAsync");
-
         CompletableFuture<Pi>[] completableFuturePis = Stream.generate(() -> timeToComputeInSeconds)
                 .limit(numberOfProbes).map(piSingleService::computeSinglePiAsync).toArray(CompletableFuture[]::new);
 
@@ -31,7 +29,6 @@ public class PiMultiService {
                 .map(completableFuturePi -> callCatchingErrors(completableFuturePi::get, null)).filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-        logger.info("End computeMultiPisAsync");
         return pis;
     }
 
