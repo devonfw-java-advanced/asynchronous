@@ -3,7 +3,6 @@ logging:
     root: INFO
     web: INFO
 server:
-  connection-timeout: 3600s
   port: 7777
   tomcat:
     accept-count: 100
