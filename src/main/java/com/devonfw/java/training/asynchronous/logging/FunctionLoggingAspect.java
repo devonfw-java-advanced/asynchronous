@@ -44,11 +44,11 @@ public class FunctionLoggingAspect {
         String parameters = Stream.of(joinPoint.getArgs()).map(Object::toString)
                 .collect(Collectors.joining(", ", "(", ")"));
 
-        logger.info("Start {}.{}{} [{}]", className, methodName, parameters, Thread.currentThread().getName());
+        logger.info("Start {}.{}{}", className, methodName, parameters);
         Object obj = joinPoint.proceed();
 
         long timeTaken = System.currentTimeMillis() - startTime;
-        logger.info("End   {}.{}{} [{}]: {} ms", className, methodName, parameters, Thread.currentThread().getName(), timeTaken);
+        logger.info("End   {}.{}{}: {} ms", className, methodName, parameters, timeTaken);
 
         return obj;
     }
