@@ -37,8 +37,6 @@ public class PiController {
             @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
             @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes,
             Model model) {
-        return () -> {
-            return pi(timeToComputeInSeconds, numberOfProbes, model);
-        };
+        return () -> pi(timeToComputeInSeconds, numberOfProbes, model);
     }
 }
