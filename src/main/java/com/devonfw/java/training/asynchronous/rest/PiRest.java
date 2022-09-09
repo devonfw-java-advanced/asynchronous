@@ -30,9 +30,7 @@ public class PiRest {
     public Callable<List<Pi>> piAsync(
             @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
             @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes) {
-        return () -> {
-            return piService.computeMultiPis(timeToComputeInSeconds, numberOfProbes);
-        };
+        return () -> piService.computeMultiPis(timeToComputeInSeconds, numberOfProbes);
     }
 
 }
