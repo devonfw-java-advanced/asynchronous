@@ -25,6 +25,20 @@ public class PiRest {
         return piService.computeMultiPisAsync(timeToComputeInSeconds, numberOfProbes);
     }
 
+    @GetMapping("pi2")
+    public List<Pi> pi2(
+            @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
+            @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes) {
+        return piService.computeMultiPisAsyncWithExecutor(timeToComputeInSeconds, numberOfProbes);
+    }
+
+    @GetMapping("pi3")
+    public List<Pi> pi3(
+            @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
+            @RequestParam(name = "numberOfProbes", required = false, defaultValue = "0") int numberOfProbes) {
+        return piService.computeMultiPisAsyncWithExecutorService(timeToComputeInSeconds, numberOfProbes);
+    }
+
     @GetMapping("pi-async")
     public Callable<List<Pi>> piAsync(
             @RequestParam(name = "timeToComputeInSeconds", required = false, defaultValue = "0") int timeToComputeInSeconds,
