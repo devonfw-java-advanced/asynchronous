@@ -37,11 +37,7 @@ public class PiMultiService {
 
     @Async("async")
     public void computeMultiPis(int timeToComputeInSeconds, int numberOfProbes, DeferredResult<List<Pi>> result) {
-        result.setResult(
-                Stream.generate(() -> timeToComputeInSeconds).
-                        limit(numberOfProbes)
-                        .map(piSingleService::computeSinglePi)
-                        .collect(Collectors.toList()));
+        result.setResult(computeMultiPisAsync(timeToComputeInSeconds, numberOfProbes));
     }
 
     public List<Pi> computeMultiPis(int timeToComputeInSeconds, int numberOfProbes) {

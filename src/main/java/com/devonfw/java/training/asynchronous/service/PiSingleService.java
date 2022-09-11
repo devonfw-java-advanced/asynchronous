@@ -11,7 +11,7 @@ import java.util.concurrent.Future;
 @Service
 public class PiSingleService {
 
-    @Async("asyncExecutor")
+    @Async("async")
     public Future<Pi> computeSinglePiAsync(int timeToComputeInSeconds) {
         return new AsyncResult<>(computeSinglePi(timeToComputeInSeconds));
     }
