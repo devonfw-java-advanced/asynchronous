@@ -1,20 +1,19 @@
 package com.devonfw.java.training.asynchronous.service;
 
-import java.time.Instant;
-import java.util.concurrent.CompletableFuture;
-
 import com.devonfw.java.training.asynchronous.entity.Pi;
-
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.concurrent.Future;
 
 @Service
 public class PiSingleService {
 
-    @Async
-    public CompletableFuture<Pi> computeSinglePiAsync(int timeToComputeInSeconds) {
-        Pi pi = computeSinglePi(timeToComputeInSeconds);
-        return CompletableFuture.completedFuture(pi);
+    @Async("asyncExecutor")
+    public Future<Pi> computeSinglePiAsync(int timeToComputeInSeconds) {
+        return new AsyncResult<>(computeSinglePi(timeToComputeInSeconds));
     }
 
     public Pi computeSinglePi(int timeToComputeInSeconds) {
@@ -24,7 +23,7 @@ public class PiSingleService {
         Instant now = Instant.now();
         Instant end = now.plusSeconds(timeToComputeInSeconds);
         while (end.isAfter(now)) {
-            // trow dart and count
+            // throw dart and count
             nThrows++;
             if (whetherTheDartHit()) {
                 nHits++;
@@ -33,19 +32,10 @@ public class PiSingleService {
             now = Instant.now();
         }
 
-        Pi pi = computePiUsingThrowsAndHits(nThrows, nHits);
-
-        return pi;
+        return computePiUsingThrowsAndHits(nThrows, nHits);
     }
 
     private boolean whetherTheDartHit() {
-        // throwing a dart takes some time
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            // ignore
-        }
-
         double x = Math.random(), y = Math.random();
         return x * x + y * y <= 1.0;
     }
