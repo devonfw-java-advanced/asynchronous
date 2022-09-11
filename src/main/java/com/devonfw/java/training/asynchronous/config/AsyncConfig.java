@@ -2,23 +2,23 @@ package com.devonfw.java.training.asynchronous.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 
 @Configuration
-public class TaskExecutorConfig {
+@EnableAsync
+public class AsyncConfig {
 
-    @Bean
-    @Primary
-    public Executor taskExecutor() {
+    @Bean("async")
+    public Executor asyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(0);
         executor.setMaxPoolSize(Integer.MAX_VALUE);
         executor.setQueueCapacity(0);
         executor.setKeepAliveSeconds(10);
-        executor.setThreadNamePrefix("primary-");
+        executor.setThreadNamePrefix("async-");
         executor.initialize();
         return executor;
     }
